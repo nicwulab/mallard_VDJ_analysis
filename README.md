@@ -1,5 +1,7 @@
 # Duck WGS VDJ annotation
 
+Slides: [Google Slides](https://docs.google.com/presentation/d/1NGmjx7WBobTo-bA2qGwDfCHLcKNKb8VHV5R5V0xoRYg/edit?usp=sharing)
+
 location of data files:
 `../data/20241202_DuckWGS_assemble/Bird75_min1k_trimmed_l0_cov90.p_ctg.fa`
 
@@ -37,10 +39,6 @@ muscle -align result/v_gene_tail.fa -output result/v_gene_tail.fasta
 ```
 
 
-
-
-
-
 ## VDJSeq-Solver: In Silico V(D)J Recombination Detection Tool
 
 - mapping reads on rearranged gene segments poses a number of challenges:  V, D, J regions and by the inserted or deleted nucleotides due to enzymatic processes.
@@ -76,3 +74,15 @@ Some tools may helpful in this task:
     1. 24.Gaeta BA, Malming HR, Jackson KJ, Bain ME, Wilson P, Collins AM. IHMMune-align: hidden Markov model-based alignment and Bioinformatics of germline genes in rearranged immunoglobulin gene sequences. Immunology. 2007;23: 1580–1587.
     25. Laursen O, Nielsen M, Larsen SR, Barington T. No evidence for the use of DIR, D-D fusions, chromosome 15 open reading frames or VH replacement in the peripheral repertoire was found on application of an improved algorithm, JointML, to 6329 human immunoglobulin H rearrangements. Immunology. 2006;119: 265–277.
 
+
+
+# Compare to Chicken
+
+## 12-23 RSS sequence
+
+
+![](./SpCompair/plot/RSS_compair.png)
+
+Different from Chicken, all IGHD has the conserved RSS. But in the Duck, their are slightly change on the RSS in IGHD
+
+|![](./SpCompair/plot/ChickenRSS.png)|![](./SpCompair/plot/Duck_IGH_RSS.png.png)|
