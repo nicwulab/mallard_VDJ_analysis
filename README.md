@@ -80,9 +80,21 @@ Some tools may helpful in this task:
 
 ## 12-23 RSS sequence
 
-
+1. Both Chicken and Duck potentially not 12-23 gap conservation
 ![](./SpCompair/plot/RSS_compair.png)
 
+2. Chicken IGHD RSS are conserved.
 Different from Chicken, all IGHD has the conserved RSS. But in the Duck, their are slightly change on the RSS in IGHD
 
-|![](./SpCompair/plot/ChickenRSS.png)|![](./SpCompair/plot/Duck_IGH_RSS.png.png)|
+|![](./SpCompair/plot/ChickenRSS.png)|![](./SpCompair/plot/Duck_IGH_RSS.png)|
+|:--:|:--:|
+| Chicken IGHD RSS | Duck IGHD RSS |
+
+3. Duck has more than 1 functional IGLV
+
+From the Imgt, Chicken has only 1 functional IGLV (IGLV1-1) from IMGT000008. It also has other 2 records of functional IGLV, but they are from other assemblies (M24403 and M15095) and all belong to the IGLV1-1 family.
+
+![](./SpCompair/plot/Duck_IGL_RSS.png)
+![](./SpCompair/plot/Chicken_IGL_loc.png)
+
+
