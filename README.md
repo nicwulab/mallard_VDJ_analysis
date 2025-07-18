@@ -97,4 +97,13 @@ From the Imgt, Chicken has only 1 functional IGLV (IGLV1-1) from IMGT000008. It 
 ![](./SpCompair/plot/Duck_IGL_RSS.png)
 ![](./SpCompair/plot/Chicken_IGL_loc.png)
 
+Test: 
+- Checking from the [IMGT database](https://www.imgt.org/IMGTrepertoire/index.php?section=LocusGenes&repertoire=genetable&species=Chicken&group=IGLV), there are only 1 functional gene as mentioned before.
+- Checking the RSS from the assembly IMGT000008
 
+
+## 12-23 RSS?
+
+The best way to anser 12-23 is conserved or not is checking the structure of the complex.
+
+I using human complex (PDB ID: 3jbw) as a reference to rebuild both human, chicken, and duck RAG-RSS comples. 

@@ -1,0 +1,2 @@
+load fold_rag1_rag2_duck_model_4.cif
+save fold_rag1_rag2_duck_model_4.pdb
