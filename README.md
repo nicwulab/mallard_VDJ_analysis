@@ -101,9 +101,17 @@ Test:
 - Checking from the [IMGT database](https://www.imgt.org/IMGTrepertoire/index.php?section=LocusGenes&repertoire=genetable&species=Chicken&group=IGLV), there are only 1 functional gene as mentioned before.
 - Checking the RSS from the assembly IMGT000008
 
-
-## 12-23 RSS?
-
 The best way to anser 12-23 is conserved or not is checking the structure of the complex.
 
 I using human complex (PDB ID: 3jbw) as a reference to rebuild both human, chicken, and duck RAG-RSS comples. 
+
+
+
+
+## Dose Chicken has Multiple functional IGLV?
+
+To answer this question, I searched RSS sequence from the reference 'IMGT000008' and found 24 very similar RSS which 1 of them just behind the functional IGLV and IGLJ. Rest of them are far away from any of the psudo genes which listed in IMGT database. So, at in IMGT database, there are only 1 functional IGLV gene.
+
+Then, I expanded the search by blast the IGLV1 on the IMGT000008 to find more potential IGLV genes. I found 1 un-recognized potential IGLV on the region of '5347:5705' (contains the RSS) which has the RSS 'gcaaaaat' at the taill. But sadly, it doesn't has the complete RSS. So, it is not a functional IGLV gene. But it could still be a psudo IGLV
+
+
