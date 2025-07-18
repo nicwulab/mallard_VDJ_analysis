@@ -105,7 +105,9 @@ The best way to anser 12-23 is conserved or not is checking the structure of the
 
 I using human complex (PDB ID: 3jbw) as a reference to rebuild both human, chicken, and duck RAG-RSS comples. 
 
+Then, I checked the distance between the DNA and the motif "GGRPRQ" (Which is the V1-V7 in the table below) and get this result below. It shows that In the standard model (3jbw), the motif are very closing to "GTTTT", this result also show on the predicted Chickenand Duck Rag1/2 and DNA complex. So, the 12-23 RSS might conserved in Chicken and Duck.
 
+![](./SpCompair/plot/StructureAlign_ChainNear.png)
 
 
 ## Dose Chicken has Multiple functional IGLV?
