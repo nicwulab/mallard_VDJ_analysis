@@ -86,7 +86,7 @@ def AlignSort(alignAA, NT):
 #####################
 
 # read the genome
-seq_loc="../data/20241202_DuckWGS_assemble/Bird75_min1k_trimmed_l0_cov90.p_ctg.fa"
+seq_loc="/data3/wenkanl2/Tomas/data/20241202_DuckWGS_assemble/Bird75_min1k_trimmed_l0_cov90.p_ctg.fa"
 seq_dict = SeqIO.to_dict(SeqIO.parse(seq_loc, "fasta"))
 
 # preparing the IGH gene
@@ -104,7 +104,7 @@ os.system(CMD)
 CMD = '''blastn -query result/fullVDJ.fasta  -db blastdb/2chrom -evalue 1e-5 -max_target_seqs 1 -num_threads 60 -max_hsps 1 -outfmt '6 qacc sacc pident qcovs qlen qstart qend sstart send length mismatch gaps' > result/blast2chrom.tsv'''
 os.system(CMD)
 
-# split to IGH and IGV
+# split to IGH and IGL
 tb_hl = pd.read_csv('result/blast2chrom.tsv', sep='\t')
 tb_hl.columns = ['qacc', 'sacc', 'pident', 'qcovs', 'qlen', 'qstart', 'qend', 'sstart', 'send', 'length', 'mismatch', 'gaps']
 
