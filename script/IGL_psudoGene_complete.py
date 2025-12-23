@@ -78,7 +78,7 @@ def AlignSort(alignAA, NT):
 #####################
 
 # read the genome
-seq_loc="../data/20241202_DuckWGS_assemble/Bird75_min1k_trimmed_l0_cov90.p_ctg.fa"
+seq_loc="/data3/wenkanl2/Tomas/data/20241202_DuckWGS_assemble/Bird75_min1k_trimmed_l0_cov90.p_ctg.fa"
 seq_dict = SeqIO.to_dict(SeqIO.parse(seq_loc, "fasta"))
 
 # preparing the IGL gene
@@ -193,7 +193,7 @@ with open('result/IGLV.fa', 'w') as f:
     f.write('\n'.join(IGLV))
 
 # 4. align the V gene back to the scaffolds
-CMD = 'blastn -query result/IGLV.fa  -db ../data/20241202_DuckWGS_assemble/ptg000063l -evalue 1e-5 -max_target_seqs 100 -num_threads 1 -max_hsps 100 -outfmt "6 qacc sacc pident qcovs qlen qstart qend sstart send length mismatch gaps sseq" -qcov_hsp_perc 70 -out result/IGLV-ptg000063l.tsv'
+CMD = 'blastn -query result/IGLV.fa  -db /data3/wenkanl2/Tomas/data/20241202_DuckWGS_assemble/ptg000063l -evalue 1e-5 -max_target_seqs 100 -num_threads 1 -max_hsps 100 -outfmt "6 qacc sacc pident qcovs qlen qstart qend sstart send length mismatch gaps sseq" -qcov_hsp_perc 70 -out result/IGLV-ptg000063l.tsv'
 os.system(CMD)
 
 # 5. read the blast result

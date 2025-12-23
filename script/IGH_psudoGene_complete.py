@@ -136,8 +136,8 @@ with open('final/IGHD.fa', 'w') as f:
     N = 0
     for i in List_D:
         N += 1
-        dgene = str(seq_dict[fun_gene.sacc].seq[i[0]+534855 +12+9+7-1: i[1]+534855-9-12-7])
-        f.write(f">IGHD{N} {tb_blast.iloc[0].sacc} {i[0]} {i[1]} \n{dgene}\n")
+        dgene = str(seq_dict['ptg000189l'].seq[i[0]+534855 +12+9+7-1: i[1]+534855-9-12-7])
+        f.write(f">IGHD{N} ptg000189l {i[0]} {i[1]} \n{dgene}\n")
 
 seq_loc="final/IGHD.fa"
 IGHD_dict = SeqIO.to_dict(SeqIO.parse(seq_loc, "fasta"))
@@ -174,6 +174,13 @@ with open('result/IGHV1-1_99.fa', 'w') as f:
 # Cut the Leader based on the Functional V gene
 # 1. blast the Functional V gene to the potential V gene
 ## Make the blastdb
+'''
+result/Leader_IGHV.fa is the leader sequences with IGHV gene
+result/IGHV1-1_99.fa is the head of the functional V gene
+
+After the blast, we can find the head of the V gene to remove the leader sequences.
+'''
+
 CMD = 'makeblastdb -parse_seqids -dbtype nucl -in result/Leader_IGHV.fa  -out blastdb/Leader_IGHV'
 os.system(CMD)
 ## blast
@@ -200,7 +207,7 @@ with open('result/IGHV.fa', 'w') as f:
     f.write('\n'.join(IGHV))
 
 # 4. align the V gene back to the scaffolds
-CMD = 'blastn -query result/IGHV.fa  -db ../data/20241202_DuckWGS_assemble/ptg000189l -evalue 1e-5 -max_target_seqs 100 -num_threads 1 -max_hsps 100 -outfmt "6 qacc sacc pident qcovs qlen qstart qend sstart send length mismatch gaps sseq" -qcov_hsp_perc 70 -out result/IGHV-ptg000189l.tsv'
+CMD = 'blastn -query result/IGHV.fa  -db /data3/wenkanl2/Tomas/data/20241202_DuckWGS_assemble/ptg000189l -evalue 1e-5 -max_target_seqs 100 -num_threads 1 -max_hsps 100 -outfmt "6 qacc sacc pident qcovs qlen qstart qend sstart send length mismatch gaps sseq" -qcov_hsp_perc 70 -out result/IGHV-ptg000189l.tsv'
 os.system(CMD)
 
 # 5. read the blast result
@@ -224,15 +231,11 @@ geneType = {0:'+ 1',
             4:'- 2',
             5:'- 3',}
 
-
 def Align_find(align_best, seq_nt):
     tmp1, tmp2, _, _ = AlignSort(align_best.seqA, IGHV1)
     tmp3, tmp4,tmp5,tmp6 = AlignSort(align_best.seqB, seq_nt)
     Result = "\n".join(['\n'.join([tmp6[i],tmp5[i],tmp4[i],tmp2[i], tmp1[i], tmp3[i], '\n']) for i in range(len(tmp3))])
     return Result
-
-
-from collections import Counter
 
 def Align_best(MIN, MAX):
     seq1 = str(seq_dict[chrom].seq[MIN:MAX].translate())
@@ -257,12 +260,11 @@ def Align_best(MIN, MAX):
         head_gap += 1
     return direct, jump, head_gap, align_best
 
-
 chrom = tb_vdj_genome.sacc.iloc[0]
 Seq_aa = []
 Seq_nt = []
 N = 0
-for i in range(58): #Slist.shape[0]-1):
+for i in range(Slist.shape[0]-1): #:
     tmp = tb_vdj_genome.iloc[Slist[i]:Slist[i+1], :]
     # check fo 100 qcovs first and then
     tmp = tmp[tmp.qcovs>=100]
@@ -271,7 +273,7 @@ for i in range(58): #Slist.shape[0]-1):
     MIN = tmp.MIN.min()
     # best alignment result
     direct, jump, head_gap, align_best = Align_best(MIN, MAX)
-    if align_best.score> 50:
+    if align_best.score > 50:
         # fill the gap in the head
         if direct == '+':
             MIN +=  jump -1
@@ -320,7 +322,7 @@ os.system(CMD)
 sstart = 541834
 send = 541928
 
-jgene = str(seq_dict[fun_gene.sacc].seq[sstart+7+9+23-1: send])
+jgene = str(seq_dict["ptg000189l"].seq[sstart+7+9+23-1: send])
 
 with open('final/IGHJ.fa', 'w') as f:
-    f.write(f">IGHJ1 {tb_blast.iloc[0].sacc} {sstart} {send} \n{jgene}\n")
+    f.write(f">IGHJ1 ptg000189l {sstart} {send} \n{jgene}\n")

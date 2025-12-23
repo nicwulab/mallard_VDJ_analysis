@@ -303,39 +303,20 @@ The pipeline can be run sequentially, with each step depending on outputs from p
 
 ---
 
-## Methods (Publication Style)
+## Methods (Condensed Description)
 
-### Genome Assembly and VDJ Sequence Extraction
+All IGH pseudogene annotation steps were performed in an integrated workflow to minimize fragmentation and redundancy. The duck genome assembly (Bird75_min1k_trimmed_l0_cov90.p_ctg.fa) served as the reference. VDJ sequences were extracted from four duck single-cell VDJ-Seq (scVDJ-Seq) assembly TSV files, converted to FASTA format (63144 in total), and mapped to the genome using BLASTN (e-value ≤ 1×10⁻⁵, max_target_seqs=1). IGH- and IGL-mapping sequences were identified by BLAST hit to the respective scaffolds (ptg000189l for IGH, ptg000063l for IGL).
 
-The duck genome assembly (Bird75_min1k_trimmed_l0_cov90.p_ctg.fa) was used as the reference for IGH pseudogene annotation. VDJ sequences were extracted from previously annotated TSV files containing framework regions (FR1-4) and complementarity-determining regions (CDR1-3) identified through single-cell VDJ sequencing analysis. Full-length VDJ sequences were converted to FASTA format and mapped to the genome assembly using BLASTN (e-value ≤ 1×10⁻⁵, max_target_seqs = 1) to identify sequences originating from the IGH locus scaffold (ptg000189l) versus the IGL locus scaffold (ptg000063l).
+D gene segments (IGHD1-5) were defined by manual identification of RSS (recombination signal sequence) motifs on the IGH scaffold, using imperfect but targeted searches to locate RSS-flanked segments. The resulting scaffold coordinates (2083-2160, 3162-3244, 4132-4213, 5282-5366, 6190-6281 relative to position 534855) reflect these empirically determined boundaries. Extracted D sequences included additional offset nucleotides to ensure complete RSS coverage and were validated against known duck D gene references. A BLASTN database of D gene sequences was constructed to profile D gene usage in VDJ repertoires and show that 8159 of 9255 IGH can be annotated. **88.16%** D gene were found.
 
-### D Gene Identification and Extraction
+To recover full V gene heads, the region upstream of each D gene alignment in VDJ sequences was considered the leader. Each leader was aligned to a functional IGHV1 gene reference (99 nt) with BLASTN (e-value=1, query coverage ≥70%). For each leader hit, a putative full-length V gene sequence was extracted, extending from the inferred start. Sequences <200 nt were excluded.
 
-Diversity (D) gene segments were identified using predefined genomic coordinates on the IGH scaffold, which were previously determined through signal sequence analysis. Five D gene segments (IGHD1-5) were extracted from positions 2083-2160, 3162-3244, 4132-4213, 5282-5366, and 6190-6281 (relative to scaffold position 534855), with offset adjustments applied to account for recombination signal sequences (RSS). Extracted D gene sequences were validated against known D gene sequences. To identify D gene usage in VDJ sequences, a BLASTN database was constructed from the extracted D genes, and VDJ sequences were aligned to this database using permissive parameters (e-value = 1, word_size = 4, strand = plus) to accommodate sequence diversity.
+V gene pseudogene boundaries and reading frame were refined by mapping candidate V genes back to the IGH scaffold (BLASTN: e-value ≤ 1×10⁻⁵, query coverage ≥70%). Hits were grouped by genomic location. For each group, alignments with query coverage ≥100% were used to define cluster coordinates. Cluster-spanning genomic DNA was subjected to six-frame translation, with each frame aligned to the functional IGHV1 protein (pairwise local alignment, BLOSUM62, gap open -10, gap extension -0.5). The frame with the highest score was taken as the correct reading frame; leading gaps/frameshifts were trimmed to maximize coding sequence. Sequences with alignment score ≤50 were discarded.
 
-### V Gene Head Completion Using Functional Gene Reference
+The J gene was similarly extracted from a fixed IGH coordinate (541834-541928, with RSS adjustment) using the same extraction method as for D genes.
 
-To address incomplete pseudogene head sequences in previous annotations, a reference-based approach was employed. Leader sequences were extracted from VDJ sequences by identifying the region upstream of D gene alignment positions. A known functional IGHV1 gene sequence (first 99 nucleotides) was used as a reference to identify the start positions of pseudogene sequences. Leader sequences were aligned to the functional V gene reference using BLASTN (e-value = 1, query coverage ≥ 70%, max_target_seqs = 100,000) to identify homologous regions. For each alignment, complete V gene sequences were extracted starting from the position corresponding to the functional V gene start (calculated as subject_start - query_start), ensuring complete pseudogene heads. Sequences shorter than 200 nucleotides were excluded from further analysis.
+Final V and D gene sequences, both nucleotide and protein, were aligned using MUSCLE for further analysis. At all stages, sequences failing minimum criteria (length ≥200 nt, alignment coverage ≥70–100%, protein alignment score >50, frame consistency) were excluded. Whole-pipeline sequence and analysis management used BLAST+ (v2.x), MUSCLE, BioPython (for BLOSUM62 and translation), pandas, numpy, and seqkit as needed.
 
-### V Gene Tail Definition and Reading Frame Determination
+Pseudogene annotations required all these quality and statistical criteria: full-length segment recovery (by coverage), protein-level match to the functional gene, adequate sequence length, and frame integrity. Only sequences passing all criteria were kept for subsequent annotation and analysis.
 
-Extracted V gene sequences were mapped back to the IGH scaffold (ptg000189l) using BLASTN (e-value ≤ 1×10⁻⁵, query coverage ≥ 70%, max_target_seqs = 100) to identify their genomic locations. Alignments were grouped by genomic position to identify distinct V gene clusters. For each cluster, alignments with query coverage ≥ 100% were selected, and the minimum and maximum genomic coordinates were determined.
-
-To accurately define pseudogene boundaries and identify the correct reading frame, a six-frame translation approach was implemented. Genomic sequences spanning each V gene cluster were translated in all three forward and three reverse reading frames. Translated sequences were aligned to the functional IGHV1 protein sequence using pairwise local alignment with the BLOSUM62 substitution matrix (gap open penalty = -10, gap extension penalty = -0.5). The reading frame yielding the highest alignment score was selected for each pseudogene. Genomic boundaries were adjusted to remove leading gaps in the alignment and to account for frame shifts, ensuring complete coding sequences. Pseudogenes with alignment scores ≤ 50 were excluded as low-confidence annotations.
-
-### J Gene Extraction
-
-The joining (J) gene segment was extracted from a predefined genomic position (541834-541928 on the IGH scaffold) with offset adjustments applied to account for RSS sequences, following the same approach used for D gene extraction.
-
-### Multiple Sequence Alignment and Validation
-
-Final V gene nucleotide and protein sequences were aligned using MUSCLE to generate multiple sequence alignments for phylogenetic analysis and visualization. Quality control filters were applied throughout the pipeline: minimum sequence length (≥200 nucleotides), query coverage thresholds (≥70% for initial alignments, ≥100% for boundary refinement), and alignment score thresholds (>50 for protein alignments).
-
-### Computational Tools and Parameters
-
-Sequence alignments were performed using BLAST+ (version 2.x) with parameters optimized for immunoglobulin gene diversity. Protein-level alignments utilized the BLOSUM62 substitution matrix implemented in BioPython. Multiple sequence alignments were generated using MUSCLE. All analyses were performed using Python 3 with BioPython, pandas, and numpy libraries. Sequence manipulation was performed using seqkit where applicable.
-
-### Statistical and Quality Control Criteria
-
-Pseudogene annotations were validated using multiple criteria: (1) alignment coverage thresholds to ensure complete gene segments, (2) protein-level alignment scores to confirm coding potential, (3) minimum length requirements to exclude partial sequences, and (4) reading frame consistency to ensure proper translation. Only sequences meeting all quality criteria were included in the final annotation set.
 
