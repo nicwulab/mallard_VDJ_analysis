@@ -1,40 +1,40 @@
->IGLV1-15 ptg000063l 9481310 9481591 +
-  S   R   Q   R   *   L   S   R   S   R   S   R   *   I   R   E   A   P   C   R
--   P   G   S   A   D   S   V   G   A   A   V   G   E   S   G   R   H   R   A  
- V   Q   A   A   L   T   Q   S   E   P   Q   S   V   N   P   G   G   T   V   Q 
- V   Q   A   A   L   T   Q   P   A   S   K   S   V   N   P   G   D   T   V   Q 
-GTC CAG GCA GCG CTG ACT CAG CCG GCC TCG AAG TCG GTG AAT CCG GGA GAC ACC GTG CAG
-GTC CAG GCA GCG CTG ACT CAG TCG GAG CCG CAG TCG GTG AAT CCG GGA GGC ACC GTG CAG
+>IGLV1-15 ptg000063l 9481313 9481591 +
+  R   Q   R   *   L   S   R   S   R   S   R   *   I   R   E   A   P   C   R   S
+-   G   S   A   D   S   V   G   A   A   V   G   E   S   G   R   H   R   A   D  
+ Q   A   A   L   T   Q   S   E   P   Q   S   V   N   P   G   G   T   V   Q   I 
+ Q   A   A   L   T   Q   P   A   S   K   S   V   N   P   G   D   T   V   Q   I 
+CAG GCA GCG CTG ACT CAG CCG GCC TCG AAG TCG GTG AAT CCG GGA GAC ACC GTG CAG ATC
+CAG GCA GCG CTG ACT CAG TCG GAG CCG CAG TCG GTG AAT CCG GGA GGC ACC GTG CAG ATC
 
 
-  S   P   A   P   G   V   V   A   A   M   A   G   S   S   R   R   P   L   A   V
-D   H   L   L   R   G   *   W   Q   L   W   L   V   P   A   E   D   P   W   Q  
- I   T   C   S   G   G   S   G   S   Y   G   W   F   Q   Q   K   T   P   G   S 
- I   T   C   S   G   G   G   S   Y   Y   G   W   F   Q   Q   K   T   P   G   T 
-ATC ACT TGC TCC GGG GGT GGC AGC TAC TAC GGC TGG TTC CAG CAG AAG ACC CCT GGC ACT
-ATC ACC TGC TCC GGG GGT AGT GGC AGC TAT GGC TGG TTC CAG CAG AAG ACC CCT GGC AGT
+  P   A   P   G   V   V   A   A   M   A   G   S   S   R   R   P   L   A   V   P
+H   L   L   R   G   *   W   Q   L   W   L   V   P   A   E   D   P   W   Q   C  
+ T   C   S   G   G   S   G   S   Y   G   W   F   Q   Q   K   T   P   G   S   A 
+ T   C   S   G   G   G   S   Y   Y   G   W   F   Q   Q   K   T   P   G   T   G 
+ACT TGC TCC GGG GGT GGC AGC TAC TAC GGC TGG TTC CAG CAG AAG ACC CCT GGC ACT GGC
+ACC TGC TCC GGG GGT AGT GGC AGC TAT GGC TGG TTC CAG CAG AAG ACC CCT GGC AGT GCC
 
 
-  P   L   S   L   *   S   M   A   T   P   T   D   P   R   A   S   L   L   D   S
-C   P   C   H   C   D   L   W   Q   H   Q   Q   T   L   G   H   P   F   S   I  
- A   P   V   T   V   I   Y   G   N   T   N   R   P   S   G   I   P   S   R   F 
- G   P   V   T   V   I   Y   D   N   T   N   R   P   S   G   I   P   S   R   F 
-GGC CCT GTC ACC GTG ATC TAT GAC AAT ACC AAC AGA CCC TCG GGC ATC CCT TCT CGA TTC
-GCC CCT GTC ACT GTG ATC TAT GGC AAC ACC AAC AGA CCC TCG GGC ATC CCT TCT CGA TTC
+  L   S   L   *   S   M   A   T   P   T   D   P   R   A   S   L   L   D   S   L
+P   C   H   C   D   L   W   Q   H   Q   Q   T   L   G   H   P   F   S   I   L  
+ P   V   T   V   I   Y   G   N   T   N   R   P   S   G   I   P   S   R   F   S 
+ P   V   T   V   I   Y   D   N   T   N   R   P   S   G   I   P   S   R   F   S 
+CCT GTC ACC GTG ATC TAT GAC AAT ACC AAC AGA CCC TCG GGC ATC CCT TCT CGA TTC TCT
+CCT GTC ACT GTG ATC TAT GGC AAC ACC AAC AGA CCC TCG GGC ATC CCT TCT CGA TTC TCT
 
 
-  L   L   P   H   L   A   P   C   Q   R   *   P   S   L   G   S   K   P   R   T
-L   C   F   H   I   W   L   R   V   N   V   N   H   H   W   G   P   S   R   G  
- S   A   S   T   S   G   S   V   S   T   L   T   I   T   G   V   Q   A   E   D 
- S   A   S   T   S   G   S   V   S   T   L   T   I   T   G   V   Q   A   E   D 
-TCT GCT TCC ACA TCT GGC TCC GTG TCC ACT TTA ACC ATC ACT GGG GTC CAA GCC GAG GAC
-TCT GCT TCC ACA TCT GGC TCC GTG TCA ACG TTA ACC ATC ACT GGG GTC CAA GCC GAG GAC
+  L   P   H   L   A   P   C   Q   R   *   P   S   L   G   S   K   P   R   T   R
+C   F   H   I   W   L   R   V   N   V   N   H   H   W   G   P   S   R   G   R  
+ A   S   T   S   G   S   V   S   T   L   T   I   T   G   V   Q   A   E   D   E 
+ A   S   T   S   G   S   V   S   T   L   T   I   T   G   V   Q   A   E   D   E 
+GCT TCC ACA TCT GGC TCC GTG TCC ACT TTA ACC ATC ACT GGG GTC CAA GCC GAG GAC GAG
+GCT TCC ACA TCT GGC TCC GTG TCA ACG TTA ACC ATC ACT GGG GTC CAA GCC GAG GAC GAG
 
 
-  R   P   S   I   T   V   G   A   T   K   A   A   M
-R   G   R   L   L   L   W   E   L   R   R   Q   L  
- E   A   V   Y   Y   C   G   S   Y   E   G   S   Y 
- E   A   V   Y   Y   C   G   D   Y   S  --- --- ---
-GAG GCT GTC TAT TAC TGT GGT GAC TAC AGT --- --- ---
-GAG GCC GTC TAT TAC TGT GGG AGC TAC GAA GGC AGC TAT
+  P   S   I   T   V   G   A   T   K   A   A   M
+G   R   L   L   L   W   E   L   R   R   Q   L  
+ A   V   Y   Y   C   G   S   Y   E   G   S   Y 
+ A   V   Y   Y   C   G   D   Y   S  --- --- ---
+GCT GTC TAT TAC TGT GGT GAC TAC AGT --- --- ---
+GCC GTC TAT TAC TGT GGG AGC TAC GAA GGC AGC TAT
 
