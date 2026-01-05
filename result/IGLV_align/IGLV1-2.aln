@@ -34,15 +34,15 @@ AGA CCC TCG GGC ATC CCT TCT CGA TTC TCT GCT TCC ACA TCT GGC TCC GTG TCC ACT TTA
   P   S   L   G   S   K   P   R   T   R   P   S   I   S   V   V   P   G   M   A
 N   H   H   W   G   P   S   R   G   R   G   R   L   F   L   W   C   L   G   W  
  T   I   T   G   V   Q   A   E   D   E   A   V   Y   F   C   G   A   W   D   G 
- T   I   T   G   V   Q   A   E   D   E   A   V   Y   Y   C   G   D   Y   S   S 
-ACC ATC ACT GGG GTC CAA GCC GAG GAC GAG GCT GTC TAT TAC TGT GGT GAC TAC AGT AGT
+ T   I   T   G   V   Q   A   E   D   E   A   V   Y   Y   C   G   D   Y   S  ---
+ACC ATC ACT GGG GTC CAA GCC GAG GAC GAG GCT GTC TAT TAC TGT GGT GAC TAC AGT ---
 ACC ATC ACT GGG GTC CAA GCC GAG GAC GAG GCC GTC TAT TTC TGT GGT GCC TGG GAT GGC
 
 
-  A   - --- ---
-Q   R   --- ---
- S   A  --- ---
- N   F   K   L 
-AAT TTT AAA TTG
-AGC GCT --- ---
+  A   -
+Q   R  
+ S   A 
+--- ---
+--- ---
+AGC GCT
 

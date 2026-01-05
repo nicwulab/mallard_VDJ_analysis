@@ -31,10 +31,10 @@ TCT GCT TCC ACA TCT GGC TCC GTG TCC ACT TTA ACC ATC ACT GGG GTC CAA GCC GAG GAC
 TCT GGT TCG AAA TCT GGC TCC ACA GCC ACA TTA ACC ATC ACT AGC GTC CAA GCC GAG GAC
 
 
-  R   P   S   I   T   V   G   T   T   T   A   V   L   V ---
-R   G   R   L   L   L   W   E   L   R   Q   Q   C   W   ---
- E   A   V   Y   Y   C   G   N   Y   D   S   S   A   G  ---
- E   A   V   Y   Y   C   G   D   Y   S   S   N   F   K   L 
-GAG GCT GTC TAT TAC TGT GGT GAC TAC AGT AGT AAT TTT AAA TTG
-GAG GCC GTC TAT TAC TGT GGG AAC TAC GAC AGC AGT GCT GGT ---
+  R   P   S   I   T   V   G   T   T   T   A   V   L   V
+R   G   R   L   L   L   W   E   L   R   Q   Q   C   W  
+ E   A   V   Y   Y   C   G   N   Y   D   S   S   A   G 
+ E   A   V   Y   Y   C   G   D   Y   S  --- --- --- ---
+GAG GCT GTC TAT TAC TGT GGT GAC TAC AGT --- --- --- ---
+GAG GCC GTC TAT TAC TGT GGG AAC TAC GAC AGC AGT GCT GGT
 

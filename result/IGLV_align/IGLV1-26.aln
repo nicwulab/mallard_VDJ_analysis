@@ -34,7 +34,7 @@ TTT CTT GAT TCT CTG GTT CGA AAT CTG GCT CCA CAT CCA CGT TAA CCA TCA CTG GGG TCC
   S   *   G   *   G   R   L   *   L   *   S   Q   D   S   S   A   S   -
 Q   A   E   D   E   A   V   Y   D   S   E   V   K   T   A   V   L   V  
  K   L   R   M   R   P   S   M   T   L   K   S   R   Q   Q   C   *   C 
- A   E   D   E   A   V   Y   Y   C   G   D   Y   S   S   N   F   K   L 
-GCC GAG GAC GAG GCT GTC TAT TAC TGT GGT GAC TAC AGT AGT AAT TTT AAA TTG
+ A   E   D   E   A   V   Y   Y   C   G   D   Y   S  --- --- --- --- ---
+GCC GAG GAC GAG GCT GTC TAT TAC TGT GGT GAC TAC AGT --- --- --- --- ---
 AAG CTG AGG ATG AGG CCG TCT ATG ACT CTG AAG TCA AGA CAG CAG TGC TAG TGC
 

@@ -6,7 +6,7 @@
   "description": "result/IGLV_fun.fa",
   "number-of-letters": 2622,
   "number-of-sequences": 9,
-  "last-updated": "2025-12-22T20:50:00",
+  "last-updated": "2025-12-22T23:14:00",
   "number-of-volumes": 1,
   "bytes-total": 51200,
   "bytes-to-cache": 878,
