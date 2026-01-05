@@ -31,4 +31,4 @@ ggplot(IGH, aes(x = start, xend = end, y = 1, yend = 1, color = group)) +
        x = "Genomic position",
        y = "Gene segment") +
   theme(plot.title = element_text(hjust = 0.5))
-
+ggsave("plot/IGH_gene_segments.png", width = 10, height = 4)
