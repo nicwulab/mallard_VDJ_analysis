@@ -1,4 +1,4 @@
->IGLV1-69 ptg000063l 9432789 9433082 +
+>IGLV1-69 ptg000063l 9432789 9433082 + CACAGTGACACAGAGCAATGGGGAAGTGATACAAAAACC 23 5
   R   Q   R   *   L   S   Q   T   Q   N   R   *   T   W   Q   E   L   W   R   S
 -   G   S   A   D   S   A   R   L   K   I   G   E   H   G   R   N   C   G   D  
  Q   A   A   L   T   Q   P   D   S   K   S   V   N   M   A   G   T   V   E   I 
@@ -31,10 +31,10 @@ CCT TCT CGA TTC TCT GCT TCC ACA TCT GGC TCC GTG TCC ACT TTA ACC ATC ACT GGG GTC
 CCT TCA CGA TTC TCT GGT TCC TTG TCT GGC TCC GTG TCC ACG TTA ACC ATC ACT GGG GTC
 
 
-  K   P   R   T   R   P   S   I   T   V   L   A   G   M   A   V   L
-P   S   R   G   R   G   R   L   L   L   C   *   L   G   W   Q   Y  
- Q   A   E   D   E   A   V   Y   Y   C   A   S   W   D   G   S   T 
- Q   A   E   D   E   A   V   Y   Y   C   G   D   Y   S  --- --- ---
-CAA GCC GAG GAC GAG GCT GTC TAT TAC TGT GGT GAC TAC AGT --- --- ---
-CAA GCC GAG GAC GAG GCC GTC TAT TAC TGT GCT AGC TGG GAT GGC AGT ACT
+  K   P   R   T   R   P   S   I   T   V   L   A   G   M   A   V   L   N   C
+P   S   R   G   R   G   R   L   L   L   C   *   L   G   W   Q   Y   *   I  
+ Q   A   E   D   E   A   V   Y   Y   C   A   S   W   D   G   S   T   K   L 
+ Q   A   E   D   E   A   V   Y   Y   C   G   D   Y   S  --- --- --- --- ---
+CAA GCC GAG GAC GAG GCT GTC TAT TAC TGT GGT GAC TAC AGT --- --- --- --- ---
+CAA GCC GAG GAC GAG GCC GTC TAT TAC TGT GCT AGC TGG GAT GGC AGT ACT AAA TTG
 

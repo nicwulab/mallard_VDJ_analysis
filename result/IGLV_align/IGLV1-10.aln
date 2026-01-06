@@ -1,4 +1,4 @@
->IGLV1-10 ptg000063l 9490209 9490490 +
+>IGLV1-10 ptg000063l 9490209 9490490 + CACAGTGACACAGCGCAATGGGGAAGTGATACAAAAACC 23 3
   S   R   R   T   L   G   L   C   P   S   L   S   D   R   R   S   P   C   R   S
 -   P   A   E   P   W   D   C   A   H   P   S   V   T   G   D   H   H   A   D  
  L   P   Q   N   P   G   I   V   P   I   P   Q   *   P   E   I   T   M   Q   I 
@@ -31,10 +31,10 @@ GCT TCC ACA TCT GGC TCC GTG TCC ACT TTA ACC ATC ACT GGG GTC CAA GCC GAG GAC GAG
 GGT CCT GCA TCT GAT TAC GCA GCC ACG TTA ACC ATC ACT GGG GAC CAA ACT GAC AAT GAG
 
 
-  P   S   L   T   V   G   A   T   T   A   V   L   V
-D   H   L   L   L   W   E   L   R   Q   Q   C   *  
- T   I   S   Y   C   G   S   Y   D   S   S   A   S 
- A   V   Y   Y   C   G   D   Y   S  --- --- --- ---
-GCT GTC TAT TAC TGT GGT GAC TAC AGT --- --- --- ---
-ACC ATC TCT TAC TGT GGG AGC TAC GAC AGC AGT GCT AGT
+  P   S   L   T   V   G   A   T   T   A   V   L   V   L
+D   H   L   L   L   W   E   L   R   Q   Q   C   *   C  
+ T   I   S   Y   C   G   S   Y   D   S   S   A   S   A 
+ A   V   Y   Y   C   G   D   Y   S  --- --- --- --- ---
+GCT GTC TAT TAC TGT GGT GAC TAC AGT --- --- --- --- ---
+ACC ATC TCT TAC TGT GGG AGC TAC GAC AGC AGT GCT AGT GCT
 

@@ -72,6 +72,55 @@ def AlignSort(alignAA, NT):
             N += 3
     return StringCut(seqA_nt), StringCut(seqA_aa), StringCut(seqA_aaN1), StringCut(seqA_aaP1)
 
+def RSS_Check():
+    # RSS Check
+    # blastn -query data/RSS_IGL.fa  -db /data3/wenkanl2/Tomas/data/20241202_DuckWGS_assemble/ptg000063l  -evalue 30000 -outfmt '6 qacc sacc pident qcovs qlen qstart qend sstart send qseq sseq' -word_size 4 > result/RSS_IGL.tsv
+    RSS_IGL = pd.read_csv('result/RSS_IGL.tsv', sep='\t', header=None)
+    RSS_IGL.columns = ['qacc', 'sacc', 'pident', 'qcovs', 'qlen', 'qstart', 'qend', 'sstart', 'send', 'qseq', 'sseq']
+    # remove gap/insertion 
+    RSS_IGL = RSS_IGL[~RSS_IGL.sseq.str.contains('-')]
+    RSS_IGL = RSS_IGL[~RSS_IGL.qseq.str.contains('-')]
+    # add direction
+    RSS_IGL['dir'] = np.where(RSS_IGL.sstart < RSS_IGL.send, '+', '-')
+
+    # adjust the star and end base on the qstart and qend
+    RSS_IGL.sstart[RSS_IGL.dir =='+'] -=RSS_IGL.qstart[RSS_IGL.dir =='+'] - 1
+    RSS_IGL.send[RSS_IGL.dir =='+'] += RSS_IGL.qlen[RSS_IGL.dir =='+'] - RSS_IGL.qend[RSS_IGL.dir =='+']
+
+    RSS_IGL.sstart[RSS_IGL.dir =='-'] +=RSS_IGL.qstart[RSS_IGL.dir =='-'] - 1
+    RSS_IGL.send[RSS_IGL.dir =='-'] -= RSS_IGL.qlen[RSS_IGL.dir =='-'] - RSS_IGL.qend[RSS_IGL.dir =='-']
+
+    # (RSS_IGL.sstart - RSS_IGL.send).unique()
+    RSS_IGL1 = RSS_IGL[RSS_IGL.qacc =='RSS_IGL1']
+    RSS_IGL2 = RSS_IGL[RSS_IGL.qacc =='RSS_IGL2']
+
+    RSS_IGL1_fend = RSS_IGL1.send[RSS_IGL1.dir == '+']
+    RSS_IGL1_rstart = RSS_IGL1.sstart[RSS_IGL1.dir == '-']
+    RSS_IGL2_fstart = RSS_IGL2.sstart[RSS_IGL2.dir == '+']
+    RSS_IGL2_rend = RSS_IGL2.send[RSS_IGL2.dir == '-']
+
+    # Pairwise distance check
+    RSSPair_f = pd.DataFrame([RSS_IGL1_fend.to_list() + RSS_IGL2_fstart.to_list(),["RSS1"]*len(RSS_IGL1_fend)+ ["RSS2"] * len(RSS_IGL2_fstart)], index = ['pos', 'Type']).T
+    RSSPair_f.sort_values('pos', inplace=True, ignore_index=True)
+    RSSPair_f.pos = RSSPair_f.pos.astype(int)
+
+    Mask = [i for i in range(RSSPair_f.shape[0]-1) if RSSPair_f.Type[i] == 'RSS1' and RSSPair_f.Type[i+1] == 'RSS2']
+    RSSPair_f_adj = RSSPair_f.iloc[Mask, :]
+    RSSPair_f_adj2 = RSSPair_f.iloc[[i+1 for i in Mask], :]
+    RSS_diff_f = RSSPair_f_adj2.pos.to_numpy() - RSSPair_f_adj.pos.to_numpy()
+
+    tmp22 = RSSPair_f_adj.iloc[np.where(RSS_diff_f==23)[0],:]
+    tmp23 = RSSPair_f_adj.iloc[np.where(RSS_diff_f==24)[0],:]
+    tmp24 = RSSPair_f_adj.iloc[np.where(RSS_diff_f==25)[0],:]
+    tmp22['Spacer'] = 22
+    tmp23['Spacer'] = 23
+    tmp24['Spacer'] = 24
+    RSSPair_f_result = pd.concat([tmp22, tmp23, tmp24], axis=0)
+    RSSPair_f_result.sort_values('pos', inplace=True, ignore_index=True)
+    RSSPair_f_result.pos -= 7
+    return RSSPair_f_result
+
+
 #####################
 ## Preparing the data 
 #####################
@@ -123,7 +172,7 @@ IGLJ = 'AGGTGTATTTGGGGCCGGGACCACGTTGACCGTCCTG'
 J_start = seq_dict[chrm].seq.find(IGLJ)
 J_end = J_start + len(IGLJ)
 with open('final/IGLJ.fa', 'w') as f:
-    f.write(f">IGHJ1 {chrm} {J_start+1} {J_end}\n{IGLJ}\n")
+    f.write(f">IGLJ1 {chrm} {J_start+1} {J_end}\n{IGLJ}\n")
 
 seq_loc="final/IGLJ.fa"
 IGLJ_dict = SeqIO.to_dict(SeqIO.parse(seq_loc, "fasta"))
@@ -187,6 +236,7 @@ for i in range(tb_vdj_v.shape[0]):
         if len(seq) >= 200:
             IGLV.append(f">{sacc}\n{seq}")
 
+
 with open('result/IGLV.fa', 'w') as f:
     f.write('\n'.join(IGLV))
 
@@ -247,6 +297,7 @@ def Align_best(MIN, MAX):
     return direct, jump, head_gap, align_best
 
 
+RSSPair_f_result = RSS_Check()
 chrom = tb_vdj_genome.sacc.iloc[0]
 Seq_aa = []
 Seq_nt = []
@@ -278,6 +329,16 @@ for i in range(Slist.shape[0]-1):
         if '+' == direct:
             seq_nt = str(seq_dict[chrom].seq[MIN :MAX])
             seq_aa = align_best.seqB.replace('-', '')
+            # Rss Check
+            RSS_cloest = min(abs(RSSPair_f_result.pos - MAX))
+            if RSS_cloest < 30:
+                RSS_tmp = RSSPair_f_result[abs(RSSPair_f_result.pos - MAX)==RSS_cloest].iloc[0, :].to_dict()
+                RSS_seq = seq_dict[chrom].seq[RSS_tmp['pos']:RSS_tmp['pos']+RSS_tmp['Spacer']+7+9]
+                RSS_Spacer = RSS_tmp['Spacer']
+                id = f"{id} {RSS_seq} {RSS_Spacer} {RSS_cloest}"
+                direct, jump, head_gap, align_best = Align_best(MIN, RSS_tmp['pos'])
+                seq_nt = str(seq_dict[chrom].seq[MIN :RSS_tmp['pos']])
+                seq_aa = align_best.seqB.replace('-', '')
         else:
             seq_nt = str(seq_dict[chrom].seq[MIN:MAX].reverse_complement())
             seq_aa = align_best.seqB.replace('-', '')

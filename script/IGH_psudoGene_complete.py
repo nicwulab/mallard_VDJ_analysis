@@ -79,6 +79,77 @@ def AlignSort(alignAA, NT):
             N += 3
     return StringCut(seqA_nt), StringCut(seqA_aa), StringCut(seqA_aaN1), StringCut(seqA_aaP1)
 
+def RSS_Check():
+    # RSS Check
+    # blastn -query data/RSS_IGH.fa  -db /data3/wenkanl2/Tomas/data/20241202_DuckWGS_assemble/ptg000189l  -evalue 30000 -outfmt '6 qacc sacc pident qcovs qlen qstart qend sstart send qseq sseq' -word_size 4 > result/RSS_IGH.tsv
+    RSS_IGH = pd.read_csv('result/RSS_IGH.tsv', sep='\t', header=None)
+    RSS_IGH.columns = ['qacc', 'sacc', 'pident', 'qcovs', 'qlen', 'qstart', 'qend', 'sstart', 'send', 'qseq', 'sseq']
+    # remove gap/insertion 
+    RSS_IGH = RSS_IGH[~RSS_IGH.sseq.str.contains('-')]
+    RSS_IGH = RSS_IGH[~RSS_IGH.qseq.str.contains('-')]
+    # add direction
+    RSS_IGH['dir'] = np.where(RSS_IGH.sstart < RSS_IGH.send, '+', '-')
+    # remove mismatch larger then 2 nt
+    RSS_IGH[RSS_IGH.qlen - abs(RSS_IGH.sstart-RSS_IGH.send) -1<=2]
+
+    # adjust the star and end base on the qstart and qend
+    RSS_IGH.sstart[RSS_IGH.dir =='+'] -=RSS_IGH.qstart[RSS_IGH.dir =='+'] - 1
+    RSS_IGH.send[RSS_IGH.dir =='+'] += RSS_IGH.qlen[RSS_IGH.dir =='+'] - RSS_IGH.qend[RSS_IGH.dir =='+']
+
+    RSS_IGH.sstart[RSS_IGH.dir =='-'] +=RSS_IGH.qstart[RSS_IGH.dir =='-'] - 1
+    RSS_IGH.send[RSS_IGH.dir =='-'] -= RSS_IGH.qlen[RSS_IGH.dir =='-'] - RSS_IGH.qend[RSS_IGH.dir =='-']
+
+    # (RSS_IGH.sstart - RSS_IGH.send).unique()
+    RSS_IGH1 = RSS_IGH[RSS_IGH.qacc =='RSS_IGH1']
+    RSS_IGH2 = RSS_IGH[RSS_IGH.qacc =='RSS_IGH2']
+
+    RSS_IGH1_fend = RSS_IGH1.send[RSS_IGH1.dir == '+']
+    RSS_IGH1_rstart = RSS_IGH1.sstart[RSS_IGH1.dir == '-']
+    RSS_IGH2_fstart = RSS_IGH2.sstart[RSS_IGH2.dir == '+']
+    RSS_IGH2_rend = RSS_IGH2.send[RSS_IGH2.dir == '-']
+
+    # Pairwise distance check
+    RSSPair_f = pd.DataFrame([RSS_IGH1_fend.to_list() + RSS_IGH2_fstart.to_list(),["RSS1"]*len(RSS_IGH1_fend)+ ["RSS2"] * len(RSS_IGH2_fstart)], index = ['pos', 'Type']).T
+    RSSPair_f.sort_values('pos', inplace=True, ignore_index=True)
+    RSSPair_f.pos = RSSPair_f.pos.astype(int)
+
+    Mask = [i for i in range(RSSPair_f.shape[0]-1) if RSSPair_f.Type[i] == 'RSS1' and RSSPair_f.Type[i+1] == 'RSS2']
+    RSSPair_f_adj = RSSPair_f.iloc[Mask, :]
+    RSSPair_f_adj2 = RSSPair_f.iloc[[i+1 for i in Mask], :]
+    RSS_diff_f = RSSPair_f_adj2.pos.to_numpy() - RSSPair_f_adj.pos.to_numpy()
+
+    tmp22 = RSSPair_f_adj.iloc[np.where(RSS_diff_f==23)[0],:]
+    tmp23 = RSSPair_f_adj.iloc[np.where(RSS_diff_f==24)[0],:]
+    tmp24 = RSSPair_f_adj.iloc[np.where(RSS_diff_f==25)[0],:]
+    tmp22['Spacer'] = 22
+    tmp23['Spacer'] = 23
+    tmp24['Spacer'] = 24
+    RSSPair_f_result = pd.concat([tmp22, tmp23, tmp24], axis=0)
+    RSSPair_f_result.sort_values('pos', inplace=True, ignore_index=True)
+    RSSPair_f_result.pos -= 7
+
+    RSSPair_r = pd.DataFrame([RSS_IGH1_rstart.to_list() + RSS_IGH2_rend.to_list(),["RSS1"]*len(RSS_IGH1_rstart)+ ["RSS2"] * len(RSS_IGH2_rend)], index = ['pos', 'Type']).T
+    RSSPair_r.sort_values('pos', inplace=True, ignore_index=True)
+    RSSPair_r.pos = RSSPair_r.pos.astype(int)
+
+    Mask = [i for i in range(RSSPair_r.shape[0]-1) if RSSPair_r.Type[i] == 'RSS2' and RSSPair_r.Type[i+1] == 'RSS1']
+    RSSPair_r_adj = RSSPair_r.iloc[Mask, :]
+    RSSPair_r_adj2 = RSSPair_r.iloc[[i+1 for i in Mask], :]
+    RSS_diff_r = RSSPair_r_adj2.pos.to_numpy() - RSSPair_r_adj.pos.to_numpy()
+
+    tmp22 = RSSPair_r_adj.iloc[np.where(RSS_diff_r==23)[0],:]
+    tmp23 = RSSPair_r_adj.iloc[np.where(RSS_diff_r==24)[0],:]
+    tmp24 = RSSPair_r_adj.iloc[np.where(RSS_diff_r==25)[0],:]
+    tmp22['Spacer'] = 22
+    tmp23['Spacer'] = 23
+    tmp24['Spacer'] = 24
+    RSSPair_r_result = pd.concat([tmp22, tmp23, tmp24], axis=0)
+    RSSPair_r_result.sort_values('pos', inplace=True, ignore_index=True)
+    RSSPair_r_result.pos += 9
+
+    return RSSPair_f_result, RSSPair_r_result
+
+
 
 
 #####################
@@ -137,7 +208,7 @@ with open('final/IGHD.fa', 'w') as f:
     for i in List_D:
         N += 1
         dgene = str(seq_dict['ptg000189l'].seq[i[0]+534855 +12+9+7-1: i[1]+534855-9-12-7])
-        f.write(f">IGHD{N} ptg000189l {i[0]} {i[1]} \n{dgene}\n")
+        f.write(f">IGHD{N} ptg000189l {i[0]+534855} {i[1]+534855} \n{dgene}\n")
 
 seq_loc="final/IGHD.fa"
 IGHD_dict = SeqIO.to_dict(SeqIO.parse(seq_loc, "fasta"))
@@ -260,6 +331,7 @@ def Align_best(MIN, MAX):
         head_gap += 1
     return direct, jump, head_gap, align_best
 
+RSSPair_f_result, RSSPair_r_result = RSS_Check()
 chrom = tb_vdj_genome.sacc.iloc[0]
 Seq_aa = []
 Seq_nt = []
@@ -291,9 +363,26 @@ for i in range(Slist.shape[0]-1): #:
         if '+' == direct:
             seq_nt = str(seq_dict[chrom].seq[MIN :MAX])
             seq_aa = align_best.seqB.replace('-', '')
+            # Rss Check
+            RSS_closest = min(abs(RSSPair_f_result.pos - MAX))
+            if RSS_closest < 30:
+                RSS_tmp = RSSPair_f_result[abs(RSSPair_f_result.pos - MAX)==RSS_closest].iloc[0, :].to_dict()
+                RSS_seq = seq_dict[chrom].seq[RSS_tmp['pos']:RSS_tmp['pos']+RSS_tmp['Spacer']+7+9]
+                RSS_Spacer = RSS_tmp['Spacer']
+                id = f"{id} {RSS_seq} {RSS_Spacer} {RSS_cloest}"
+                direct, jump, head_gap, align_best = Align_best(MIN, RSS_tmp['pos'])
+                seq_nt = str(seq_dict[chrom].seq[MIN :RSS_tmp['pos']])
+                seq_aa = align_best.seqB.replace('-', '')
         else:
             seq_nt = str(seq_dict[chrom].seq[MIN:MAX].reverse_complement())
             seq_aa = align_best.seqB.replace('-', '')
+            # Rss Check
+            RSS_closest = min(abs(RSSPair_r_result.pos - MIN))
+            if RSS_closest < 30:
+                RSS_tmp = RSSPair_r_result[abs(RSSPair_r_result.pos - MIN)==RSS_closest].iloc[0, :].to_dict()
+                RSS_seq = seq_dict[chrom].seq[RSS_tmp['pos']- (RSS_tmp['Spacer']+7+9):RSS_tmp['pos']].reverse_complement()
+                RSS_Spacer = RSS_tmp['Spacer']
+                id = f"{id} {RSS_seq} {RSS_Spacer} {RSS_cloest}"
         Result = Align_find(align_best, seq_nt)
         Seq_aa.append(f"{id}\n{seq_aa}")
         Seq_nt.append(f"{id}\n{seq_nt}")

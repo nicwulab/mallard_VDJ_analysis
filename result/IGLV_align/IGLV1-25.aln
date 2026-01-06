@@ -1,4 +1,4 @@
->IGLV1-25 ptg000063l 9469421 9469717 +
+>IGLV1-25 ptg000063l 9469421 9469717 + CACAGTGACACAGAGCAATGGGGAAGTGATACAAAAACC 23 9
   R   Q   R   *   L   S   R   S   R   S   W   *   T   R   E   A   P   C   R   S
 -   G   S   A   D   S   V   G   A   A   V   G   E   P   G   R   H   R   A   D  
  Q   A   A   L   T   Q   S   E   P   Q   L   V   N   P   G   G   T   V   Q   I 
@@ -31,10 +31,18 @@ CCT TCT CGA TTC TCT GCT TCC ACA TCT GGC TCC GTG TCC ACT TTA ACC ATC ACT GGG GTC
 CCT TCT CGA TTC TCT GGT TCC AAA TCC AGC TCC ACA GCC ATG TTA ACT ATC ACT GGG GTC
 
 
-  K   L   R   T   R   P   S   I   T   V   G   A   T   T   A   V   L   V
-P   S   *   G   R   G   R   L   L   L   W   G   L   R   Q   Q   C   *  
- Q   A   E   D   E   A   V   Y   Y   C   G   G   Y   D   S   S   A   S 
- Q   A   E   D   E   A   V   Y   Y   C   G   D   Y   S  --- --- --- ---
-CAA GCC GAG GAC GAG GCT GTC TAT TAC TGT GGT GAC TAC AGT --- --- --- ---
-CAA GCT GAG GAC GAG GCC GTC TAT TAC TGT GGG GGC TAC GAC AGC AGT GCT AGT
+  K   L   R   T   R   P   S   I   T   V   G   A   T   T   A   V   L   V   L   M
+P   S   *   G   R   G   R   L   L   L   W   G   L   R   Q   Q   C   *   C   *  
+ Q   A   E   D   E   A   V   Y   Y   C   G   G   Y   D   S   S   A   S   A   D 
+ Q   A   E   D   E   A   V   Y   Y   C   G   D   Y   S  --- --- --- --- --- ---
+CAA GCC GAG GAC GAG GCT GTC TAT TAC TGT GGT GAC TAC AGT --- --- --- --- --- ---
+CAA GCT GAG GAC GAG GCC GTC TAT TAC TGT GGG GGC TAC GAC AGC AGT GCT AGT GCT GAT
+
+
+  L
+C  
+ A 
+---
+---
+GCT
 

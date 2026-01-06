@@ -1,4 +1,4 @@
->IGHV1-1 ptg000189l 534124 534435 +
+>IGHV1-1 ptg000189l 534124 534435 + CACGGTGGCTCAGAGCCCGTGCGCGGCTGTCACAAAACCC 24 2142
   L   P   P   W   M   S   P   E   G   A   S   *   V   P   G   G   P   *   P   W
 -   C   H   L   G   *   V   R   R   G   P   R   E   S   R   G   V   P   D   P  
  A   A   T   L   D   E   S   G   G   G   L   V   S   P   G   G   S   L   T   L 
@@ -39,10 +39,10 @@ CTG CAG ATG AAC AGC CTC AAG GCC GAA GAC ACC GCC ACC TAC TAC TGC GCG AAA GCT GCT
 CTG CAG ATG AAC AGC CTC AAG GCC GAA GAC ACC GCC ACC TAC TAC TGC GCG AAA GCT GCT
 
 
-  V   T   V
-W   S   R  
- G   H   G 
- G  --- ---
-GGT --- ---
-GGT CAC GGT
+  -
+W  
+ G 
+ G 
+GGT
+GGT
 

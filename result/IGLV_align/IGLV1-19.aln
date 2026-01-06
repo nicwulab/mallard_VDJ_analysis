@@ -1,4 +1,4 @@
->IGLV1-19 ptg000063l 9477504 9477784 +
+>IGLV1-19 ptg000063l 9477504 9477784 + CACAGTGTCACATTGCTATGGGGAAGTGATACAAAAACC 23 4
   R   Q   R   *   L   S   R   S   R   S   R   *   I   R   E   A   P   C   R   S
 -   G   S   A   D   S   V   G   A   A   V   G   E   S   G   R   H   R   A   D  
  Q   A   A   L   T   Q   S   E   P   Q   S   V   N   P   G   G   T   V   Q   I 
@@ -31,10 +31,10 @@ GCT TCC ACA TCT GGC TCC GTG TCC ACT TTA ACC ATC ACT GGG GTC CAA GCC GAG GAC GAG
 GGT TCG AAA TCT GGC TCC ACA GCC ACA TTA ACC ATC ACT GGC GTC AAA GCC GAG GAC GAG
 
 
-  P   S   I   T   V   V   P   T   T   A   V   V   L
-G   R   L   L   L   W   C   L   R   Q   Q   W   Y  
- A   V   Y   Y   C   G   A   Y   D   S   S   G   T 
- A   V   Y   Y   C   G   D   Y   S  --- --- --- ---
-GCT GTC TAT TAC TGT GGT GAC TAC AGT --- --- --- ---
-GCC GTC TAT TAC TGT GGT GCC TAC GAC AGC AGT GGT ACT
+  P   S   I   T   V   V   P   T   T   A   V   V   L   V
+G   R   L   L   L   W   C   L   R   Q   Q   W   Y   W  
+ A   V   Y   Y   C   G   A   Y   D   S   S   G   T   G 
+ A   V   Y   Y   C   G   D   Y   S  --- --- --- --- ---
+GCT GTC TAT TAC TGT GGT GAC TAC AGT --- --- --- --- ---
+GCC GTC TAT TAC TGT GGT GCC TAC GAC AGC AGT GGT ACT GGT
 

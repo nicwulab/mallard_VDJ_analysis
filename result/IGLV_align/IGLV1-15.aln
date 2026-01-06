@@ -1,4 +1,4 @@
->IGLV1-15 ptg000063l 9481313 9481591 +
+>IGLV1-15 ptg000063l 9481313 9481591 + CACAGTGATACAGAGCAATGGGGAAGTGATACAAAAACC 23 6
   R   Q   R   *   L   S   R   S   R   S   R   *   I   R   E   A   P   C   R   S
 -   G   S   A   D   S   V   G   A   A   V   G   E   S   G   R   H   R   A   D  
  Q   A   A   L   T   Q   S   E   P   Q   S   V   N   P   G   G   T   V   Q   I 
@@ -31,10 +31,10 @@ GCT TCC ACA TCT GGC TCC GTG TCC ACT TTA ACC ATC ACT GGG GTC CAA GCC GAG GAC GAG
 GCT TCC ACA TCT GGC TCC GTG TCA ACG TTA ACC ATC ACT GGG GTC CAA GCC GAG GAC GAG
 
 
-  P   S   I   T   V   G   A   T   K   A   A   M
-G   R   L   L   L   W   E   L   R   R   Q   L  
- A   V   Y   Y   C   G   S   Y   E   G   S   Y 
- A   V   Y   Y   C   G   D   Y   S  --- --- ---
-GCT GTC TAT TAC TGT GGT GAC TAC AGT --- --- ---
-GCC GTC TAT TAC TGT GGG AGC TAC GAA GGC AGC TAT
+  P   S   I   T   V   G   A   T   K   A   A   M   L   V
+G   R   L   L   L   W   E   L   R   R   Q   L   C   W  
+ A   V   Y   Y   C   G   S   Y   E   G   S   Y   V   G 
+ A   V   Y   Y   C   G   D   Y   S  --- --- --- --- ---
+GCT GTC TAT TAC TGT GGT GAC TAC AGT --- --- --- --- ---
+GCC GTC TAT TAC TGT GGG AGC TAC GAA GGC AGC TAT GTT GGT
 
