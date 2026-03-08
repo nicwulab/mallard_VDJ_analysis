@@ -2,6 +2,7 @@ library(ggplot2)
 library(stringr)
 library(reshape2)
 
+
 IGHV <- grep(">", read.table('final/IGHV.fa', header = FALSE, sep= '\t')[[1]], value = TRUE)
 IGHD <- grep(">", read.table('final/IGHD.fa', header = FALSE, sep= '\t')[[1]], value = TRUE)
 IGHJ <- grep(">", read.table('final/IGHJ.fa', header = FALSE, sep= '\t')[[1]], value = TRUE)
@@ -23,18 +24,15 @@ IGH.tb$Fct[grep("IGHV", IGH.tb$ID, invert = TRUE)] <- 'Functional'
 IGH.tb$Fct[1] <- 'Functional'
 
 
-head(IGH.tb)
-
-head(IGH.tb)
-
 ggplot(IGH.tb, aes(x = sstart, xend = send, y = 1, yend = 1, color = Type)) +
   geom_line(color = 'black', size = 0.5) +
   geom_segment(fill ='black', size = 20) +
   geom_segment(data = IGH.tb[IGH.tb$Direction == "-", ],
     aes(x = send, xend = sstart, y = 1.03, yend = 1.03), color = 'black',
     size = 1, arrow = arrow(length = unit(0.2, "cm"))) +
-  geom_text(aes(x = (sstart + send)/2, y = 1.04, label = ID), angle = 90, vjust = 0.5, hjust=0, size = 3) +
-  geom_label(data = IGH.tb[IGH.tb$Fct == 'Functional',],
+  geom_text(aes(x = (sstart + send)/2, y = 1.04, label = ID), angle = 90,
+  vjust = 0.5, fontface = "italic", hjust=0, size = 3) +
+  geom_label(data = IGH.tb[IGH.tb$Fct == 'Functional',], fontface = "italic",
     aes(x = (sstart + send)/2, y = 1.04, label = ID), angle = 90, vjust = 0.5, hjust=0, size = 3) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
@@ -48,7 +46,7 @@ ggplot(IGH.tb, aes(x = sstart, xend = send, y = 1, yend = 1, color = Type)) +
   theme(plot.title = element_text(hjust = 0.5),
       legend.position = 'none') +
   coord_cartesian(ylim = c(.98, 1.1)) +
-  scale_color_manual(values = c("IGHV" = "royalblue", "IGHD" = "darkgreen", "IGHJ" = "salmon"))
+  scale_color_manual(values = c("IGHV" = "#0B2D72", "IGHD" = "#40513B", "IGHJ" = "#740A03"))
 
 ggsave("plot/IGH_gene_segments_no_direction.png", width = 19.4, height = 2.68)
 
@@ -87,14 +85,19 @@ IGL.tb$Fct[IGL.tb$Type=='IGLJ'] <- 'Functional'
 
 IGL.tb$Fct[which(IGL.tb$ID %in% WithStop)] <- 'Pseudogene'
 
-
-head(IGL.tb)
-tail(IGL.tb)
-
 # get last 9 characters of RSS
 IGL.tb$RSS_pattern <- paste0(str_sub(IGL.tb$RSS,1,7), "-",IGL.tb$Spacer ,"-", str_sub(IGL.tb$RSS, -9))
 IGL.tb$RSS_pattern[IGL.tb$RSS_pattern=='--'] = ''
 
+IGL.up <- IGL.tb[seq(1, nrow(IGL.tb), 2)-1,]
+IGL.down <- IGL.tb[seq(1, nrow(IGL.tb), 2),]
+
+flipList <- c("IGLV1-70", "IGLV1-18")
+IGL.down <- rbind(IGL.down, IGL.up[IGL.up$ID %in% flipList,])
+IGL.up <- IGL.up[!IGL.up$ID %in% flipList,]
+
+# remove functional gene from IG.up
+IGL.down <- IGL.down[!IGL.down$Fct == 'Functional',]
 
 ggplot(IGL.tb, aes(x = sstart, xend = send, y = 1, yend = 1, color = Type)) +
   geom_line(color = 'black', size = 0.5) +
@@ -102,11 +105,13 @@ ggplot(IGL.tb, aes(x = sstart, xend = send, y = 1, yend = 1, color = Type)) +
   geom_segment(data = IGL.tb[IGL.tb$Direction == "-", ],
     aes(x = send, xend = sstart, y = 1.03, yend = 1.03), color = 'black',
     size = 1, arrow = arrow(length = unit(0.2, "cm"))) +
-  geom_text(data = IGL.tb[seq(1, nrow(IGL.tb), 2)-1,],
-    aes(x = (sstart + send)/2, y = 1.04, label = ID), angle = 90, vjust = 0.5, hjust=0, size = 3) +
-  geom_text(data = IGL.tb[seq(1, nrow(IGL.tb), 2),],
-    aes(x = (sstart + send)/2, y = .96, label = ID), angle = 90, vjust = 0.5, hjust=1, size = 3) +
-  geom_label(data = IGL.tb[IGL.tb$Fct == 'Functional',],
+  geom_text(data = IGL.up,
+    aes(x = (sstart + send)/2, y = 1.04, label = ID), angle = 90, 
+    fontface = "italic", vjust = 0.5, hjust=0, size = 3) +
+  geom_text(data = IGL.down,
+    aes(x = (sstart + send)/2, y = .96, label = ID), angle = 90,
+    fontface = "italic", vjust = 0.5, hjust=1, size = 3) +
+  geom_label(data = IGL.tb[IGL.tb$Fct == 'Functional',], fontface = "italic",
     aes(x = (sstart + send)/2, y = 1.04, label = ID), angle = 90, vjust = 0.5, hjust=0, size = 3) +
   geom_text(aes(x = (sstart + send)/2,
     y = 1.11, label = RSS_pattern), angle = 90, vjust = 0.5, hjust=0, size = 3) +
@@ -122,8 +127,6 @@ ggplot(IGL.tb, aes(x = sstart, xend = send, y = 1, yend = 1, color = Type)) +
   theme(plot.title = element_text(hjust = 0.5),
       legend.position = 'none') +
   coord_cartesian(ylim = c(.90, 1.3)) +
-  scale_color_manual(values = c("IGLV" = "royalblue", "IGLJ" = "salmon"))
+  scale_color_manual(values = c("IGLV" = "#0B2D72", "IGLJ" = "#740A03"))
 
 ggsave("plot/IGL_gene_segments_with_RSS.png", width = 19, height = 5.13)
-
-  
